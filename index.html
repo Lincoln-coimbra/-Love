@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declarações de Amor Especial</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      min-height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Splash screen */
+    #splash {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:#fff0f5;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      z-index:9999;
+      overflow:hidden;
+    }
+    .carta {
+      background:white;
+      padding:40px;
+      border:2px solid #e91e63;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+      text-align:center;
+      border-radius:15px;
+      transition: transform 1s ease-in-out;
+      transform-origin: left center;
+    }
+    .carta.aberta {
+      transform: rotateY(90deg);
+      opacity:0;
+    }
+
+    /* Conteúdo principal */
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      position: relative;
+      z-index: 10;
+      display:none;
+    }
+
+    h1 {
+      color: #e91e63;
+      font-size: 3rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      font-size: 1.8rem;
+      line-height: 1.6;
+      color: #333;
+      margin: 30px 0;
+      min-height: 100px;
+      font-weight: bold;
+    }
+
+    button {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(233, 30, 99, 0.4);
+    }
+    button:hover {
+      background: #c2185b;
+      transform: scale(1.05);
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #e91e63;
+      font-style: italic;
+    }
+
+    /* QR Code */
+   /* #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>*/
+<body>
+  <!-- Splash screen -->
+  <div id="splash">
+    <div class="carta" id="carta">
+      <h2>💌 Clique para abrir a carta 💌</h2>
+      <p>Uma surpresa especial espera por você...</p>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="container" id="conteudo">
+    <h1>❤️ Para o Amor da Minha Vida TAMARA ❤️</h1>
+    <div class="message" id="message">Carregando declaração especial...</div>
+    <button onclick="novaMensagem()">Mais uma declaração de amor</button>
+    <div id="qrcode"></div>
+    <div class="signature">Com todo meu amor, para sempre <p>Feliz Nosso Dia 7 </p></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script>
+    const mensagens = [
+      "Você é o amor da minha vida e minha razão de viver! ❤️",
+      "Cada dia ao seu lado é o melhor presente que eu poderia receber. 💖",
+      "Seu sorriso ilumina meu mundo mais que o sol mais brilhante. ☀️",
+      "Amo cada detalhe seu, até aqueles que você acha imperfeitos. 🌸",
+      "Você é minha alma gêmea, meu porto seguro, meu tudo. 🌹",
+      "Nunca pensei que poderia amar alguém tão profundamente como amo você. 💘",
+      "Você transformou minha vida em algo mágico e especial. ✨",
+      "Meu coração bate mais forte só de pensar em você. 💓",
+      "Você é a pessoa mais incrível que já conheci em toda minha vida. 🌟",
+      "Prometo te amar hoje, amanhã e por toda a eternidade. 💍",
+      "Seu amor é o combustível que me faz querer ser melhor a cada dia. 🚀",
+      "Você é meu sonho realizado, minha esperança e minha felicidade. 🌈"
+    ];
+
+    const messageEl = document.getElementById('message');
+
+    function novaMensagem() {
+      const randomIndex = Math.floor(Math.random() * mensagens.length);
+      messageEl.textContent = mensagens[randomIndex];
+    }
+
+    // Splash screen com animação
+    document.getElementById("splash").addEventListener("click", function() {
+      const carta = document.getElementById("carta");
+      carta.classList.add("aberta");
+      setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+        document.getElementById("conteudo").style.display = "block";
+      }, 1000); // tempo da animação
+    });
+
+    // Inicializar
+    window.onload = function() {
+      novaMensagem();
+      new QRCode(document.getElementById("qrcode"), {
+        text: "https://seulink.com", // coloque o link desejado
+        width: 128,
+        height: 128,
+      });
+    };
+  </script>
+</body>
+</html>
